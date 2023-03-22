@@ -1,6 +1,6 @@
-import Menu, { IMenuItem } from "../../moleculs/menu/menu";
+import Menu, { IMenuItem } from "../../moleculs/menu";
 import DropDownMenu, { IDropDownItem } from "../../moleculs/drop-down";
-import SearchBox from "../../moleculs/seachbox/searchbox";
+import SearchBox from "../../moleculs/seachbox";
 
 const Header = () => {
   const home: IMenuItem = {

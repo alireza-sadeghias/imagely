@@ -1,13 +1,17 @@
 import { useState } from "react";
-import Footer from "./component/organism/footer/footer";
+import WordCloud from "./component/moleculs/word-cloud";
+import Footer from "./component/organism/footer";
 
 import Header from "./component/organism/header";
+import MainContent from "./component/templates/main-content";
 
 function App() {
   return (
     <>
-      <Header />
-      <Footer />
+      {/* <Header />
+      <MainContent></MainContent>
+      <Footer /> */}
+      <WordCloud />
     </>
   );
 }
