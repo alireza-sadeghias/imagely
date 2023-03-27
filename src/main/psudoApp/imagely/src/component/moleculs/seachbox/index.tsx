@@ -1,12 +1,8 @@
-interface IProps {
-  className: string;
-}
-
-export default function SearchBox(props: IProps) {
-  const { className } = props;
+export default function SearchBox() {
   return (
     <input
-      className={`${className} w-96 rounded-xl text-end py-2 px-4 text-sm focus-visible:outline-none`}
+      className="w-96 rounded-xl flex flex-row-reverse text-start p-2 focus-visible:outline-none"
+      //   style={"direction:rtl"}
       placeholder="تصویر خود را جست و جو کنید"
       type={"text"}
     />

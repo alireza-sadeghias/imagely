@@ -1,3 +1,5 @@
+import { useState } from "react";
+import WordCloud from "./component/moleculs/word-cloud";
 import Footer from "./component/organism/footer";
 
 import Header from "./component/organism/header";
@@ -5,11 +7,12 @@ import MainContent from "./component/templates/main-content";
 
 function App() {
   return (
-    <div className="font-face bg-white">
-      <Header />
+    <>
+      {/* <Header />
       <MainContent></MainContent>
-      <Footer />
-    </div>
+      <Footer /> */}
+      <WordCloud />
+    </>
   );
 }
 

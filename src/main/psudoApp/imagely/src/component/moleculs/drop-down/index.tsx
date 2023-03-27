@@ -1,7 +1,7 @@
 import Icon from "../../atoms/icon";
 
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 export interface IDropDownItem {
   href?: string;
@@ -10,11 +10,10 @@ export interface IDropDownItem {
 
 interface IProps {
   items: IDropDownItem[];
-  className?:string
 }
 
 export default function DropDownMenu(props: IProps) {
-  const { items,className } = props;
+  const { items } = props;
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -24,13 +23,13 @@ export default function DropDownMenu(props: IProps) {
   setShow;
 
   return (
-    <div className={`${className}`}>
+    <div>
       <a className="border-none cursor-pointer" />
       <Icon
         onClick={() => {
           setShow(!show);
         }}
-        className="relative inline-block text-indigo-50"
+        className="relative inline-block"
         icon={faUserCircle}
       />
       <div
