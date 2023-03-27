@@ -1,5 +1,5 @@
-import Menu, { IMenuItem } from "../../moleculs/menu";
 import DropDownMenu, { IDropDownItem } from "../../moleculs/drop-down";
+import Menu, { IMenuItem } from "../../moleculs/menu";
 import SearchBox from "../../moleculs/seachbox";
 
 const Header = () => {
@@ -38,10 +38,10 @@ const Header = () => {
   const dropDownItems = [history, cart, exit];
 
   return (
-    <div className="p-2 text-lg flex list-none justify-between bg-orange-200 content-center items-baseline">
-      <DropDownMenu items={dropDownItems} />
-      <SearchBox></SearchBox>
-      <Menu items={items} />
+    <div className="p-2 text-lg flex list-none justify-between border-b border-slate-400 bg-gray-500 drop-shadow content-center items-baseline text-slate-50">
+      <DropDownMenu className="text-blue-500" items={dropDownItems} />
+      <SearchBox className="text-gray-900"></SearchBox>
+      <Menu className="text-slate" items={items} />
     </div>
   );
 };
