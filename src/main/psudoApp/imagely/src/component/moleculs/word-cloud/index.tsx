@@ -1,29 +1,36 @@
-interface IWord {
-  word: string;
-  frequency: number;
+import { useEffect, useRef, useState } from "react";
+
+const config = {
+  trace: true,
+  spiralLimit: 360 * 5,
+  lineHeight: "0.6",
+  xWordPadding: 1,
+  yWordPadding: 1,
+  font: "sans-serif",
+};
+
+interface IProps {
+  wordCloud: string[];
 }
 
-interface IStartPoint {
+interface IPosition {
   x: number;
   y: number;
 }
 
-let cloud: HTMLDivElement = document.createElement("div");
+const wordsDown: DOMRect[] = [];
 
-let config = {
-  spiralResolution: 1, //Lower = better resolution
-  spiralLimit: 360 * 5,
-  lineHeight: "0.8",
-  xWordPadding: 0,
-  yWordPadding: 3,
-  font: "sans-serif",
-};
+function prepareIWords(words: string[]) {
+  return words.map(function (word) {
+    return {
+      word: word,
+      freq: Math.floor(Math.random() * 50) + 10,
+    };
+  });
+}
 
-var wordsDown: DOMRect[] = [];
-
-/* =======================  PLACEMENT FUNCTIONS =======================  */
-function createWordObject(word: string, freq: number): HTMLDivElement {
-  var wordContainer: HTMLDivElement = document.createElement("div");
+function createWordObject(word: string, freq: number) {
+  const wordContainer = document.createElement("div");
   wordContainer.style.position = "absolute";
   wordContainer.style.fontSize = freq + "px";
   wordContainer.style.lineHeight = config.lineHeight;
@@ -32,7 +39,12 @@ function createWordObject(word: string, freq: number): HTMLDivElement {
   return wordContainer;
 }
 
-function placeWord(word: HTMLDivElement, x: number, y: number): void {
+function placeWord(
+  cloud: HTMLDivElement,
+  word: HTMLDivElement,
+  x: number,
+  y: number
+) {
   cloud.appendChild(word);
   word.style.left = x - word.offsetWidth / 2 + "px";
   word.style.top = y - word.offsetHeight / 2 + "px";
@@ -40,7 +52,19 @@ function placeWord(word: HTMLDivElement, x: number, y: number): void {
   wordsDown.push(word.getBoundingClientRect());
 }
 
-function intersect(word: HTMLDivElement, x: number, y: number): boolean {
+function spiral(i: number, callback: (x: number, y: number) => boolean) {
+  let angle = i;
+  let x = (1 + angle) * Math.cos(angle);
+  let y = (1 + angle) * Math.sin(angle);
+  return callback ? callback(x, y) : null;
+}
+
+function intersect(
+  cloud: HTMLDivElement,
+  word: HTMLDivElement,
+  x: number,
+  y: number
+) {
   cloud.appendChild(word);
 
   word.style.left = x - word.offsetWidth / 2 + "px";
@@ -50,9 +74,8 @@ function intersect(word: HTMLDivElement, x: number, y: number): boolean {
 
   cloud.removeChild(word);
 
-  let hasIntersect: boolean = false;
-  for (let comparisonWord of wordsDown) {
-    // const comparisonWord = wordsDown[i];
+  for (let i = 0; i < wordsDown.length; i += 1) {
+    const comparisonWord = wordsDown[i];
 
     if (
       !(
@@ -66,105 +89,69 @@ function intersect(word: HTMLDivElement, x: number, y: number): boolean {
           comparisonWord.bottom + config.yWordPadding
       )
     ) {
-      hasIntersect = true;
-      break;
+      return true;
     }
   }
 
-  return hasIntersect;
+  return false;
 }
 
-function spiral(
-  i: number,
-  callback: (x: number, y: number) => boolean
-): boolean | null {
-  let angle = config.spiralResolution * i;
-  let x = (1 + angle) * Math.cos(angle);
-  let y = (1 + angle) * Math.sin(angle);
-  const newLocal = callback ? callback(x, y) : null;
-  console.log("85", newLocal, x, y);
-  return newLocal;
+function prepareWords(
+  cloud: HTMLDivElement,
+  word: HTMLDivElement,
+  startPoint: IPosition
+) {
+  return function (x: number, y: number) {
+    if (!intersect(cloud, word, startPoint.x + x, startPoint.y + y)) {
+      placeWord(cloud, word, startPoint.x + x, startPoint.y + y);
+      return true;
+    } else {
+      return false;
+    }
+  };
 }
 
-function placeWords(words: IWord[], startPoint: IStartPoint): void {
-  for (let i = 0; i < words.length; i++) {
-    const word = createWordObject(words[i].word, words[i].frequency);
-    console.log("90", word);
-    for (var j = 0; j < config.spiralLimit; j++) {
-      //If the spiral function returns true, we've placed the word down and can break from the j loop
-      if (
-        spiral(j, function (x, y) {
-          if (!intersect(word, startPoint.x + x, startPoint.y + y)) {
-            placeWord(word, startPoint.x + x, startPoint.y + y);
-            return true;
-          } else {
-            return false;
-          }
-        })
-      ) {
-        break;
+function prepare(
+  words: { word: string; freq: number }[],
+  cloud: HTMLDivElement,
+  startPoint: IPosition
+) {
+  return function () {
+    for (let i = 0; i < words.length; i += 1) {
+      const word = createWordObject(words[i].word, words[i].freq);
+
+      for (let j = 0; j < config.spiralLimit; j++) {
+        //If the spiral function returns true, we've placed the word down and can break from the j loop
+        if (spiral(j, prepareWords(cloud, word, startPoint))) {
+          break;
+        }
       }
     }
-  }
+  };
 }
 
-function setupCloudConfig() {
-  let words: IWord[] = [
-    "words",
-    "are",
-    "cool",
-    "and",
-    "so",
-    "are",
-    "you",
-    "inconstituent",
-    "funhouse!",
-    "apart",
-    "from",
-    "Steve",
-    "fish",
-  ].map(function (word) {
-    return {
-      word: word,
-      frequency: Math.floor(Math.random() * 50) + 10,
-    } as unknown as IWord;
-  });
+export default function WordCloud(props: IProps) {
+  const { wordCloud = [] } = props;
 
-  words.sort(function (a: IWord, b: IWord) {
-    return -1 * (a.frequency - b.frequency);
-  });
-
-  cloud.style.position = "relative";
-  cloud.style.fontFamily = config.font;
-
-  var startPoint = {
+  const [cloud, setCloud] = useState(document.createElement("div"));
+  const [startPoint, setStartPoint] = useState({
     x: cloud.offsetWidth / 2,
     y: cloud.offsetHeight / 2,
-  };
-  return { words, startPoint };
-}
+  } as IPosition);
+  const [words, setWords] = useState(prepareIWords(wordCloud));
 
-export default function WordCloud() {
-  /*  ======================= SETUP ======================= */
-
-  let {
-    words,
-    startPoint,
-  }: {
-    words: IWord[];
-    startPoint: { x: number; y: number };
-  } = setupCloudConfig();
-
-  placeWords(words, startPoint);
-
-  console.log("158", cloud);
+  useEffect(() => {
+    cloud.style.position = "relative";
+    cloud.style.fontFamily = config.font;
+    words.sort(function (a, b) {
+      return -1 * (a.freq - b.freq);
+    });
+    prepare(words, cloud, startPoint)();
+  }, []);
+  const inputRef = useRef<HTMLDivElement>(cloud);
   return (
-    <>
-      {console.log("161", cloud)}
-      <div
-        className="w-full h-full bg-red-300"
-        dangerouslySetInnerHTML={{ __html: cloud.innerHTML }}
-      ></div>
-    </>
+    <div className="relative flex w-48 h-48 mx-8" ref={inputRef}>
+      cloud not working
+    </div>
   );
 }
