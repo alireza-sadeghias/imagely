@@ -1,4 +1,4 @@
-import ImageSlider from "../../organism/image-slider";
+import ImageSlider from "../image-slider";
 
 export default function Suggestion() {
   return (

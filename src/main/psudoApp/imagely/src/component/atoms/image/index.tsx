@@ -1,28 +1,44 @@
+import { useEffect, useState } from "react";
+import IPhoto from "../../../data-models/IPhoto";
+
 interface IProps {
-  image?: string;
-  url?: string;
+  // image?: string;
+  photo?: IPhoto;
   data?: string;
-  alt?: string;
   width?: string;
   height?: string;
   className?: string;
-  isLoading?: boolean;
+  loading?: boolean;
 }
 export default function Image(props: IProps) {
-  const {
-    url,
-    alt,
-    width = "w-32",
-    height = "h-32",
-    isLoading = false,
-    className,
-  } = props;
+  const { photo, width = "w-32", height = "h-32", className, loading } = props;
+
+  const [content, setContent] = useState("");
+
+  // useEffect(() => {
+  //   console.log("photo", photo);
+  //   setLoading(true);
+  //   const fetchDatas = async () => {
+  //     const response = await fetch(`${photo?.urls?.full}`);
+  //     if (!response.ok) {
+  //       throw Error(response.statusText);
+  //     }
+
+  //     return URL.createObjectURL(await response.blob());
+  //   };
+
+  //   fetchDatas().then((x) => {
+  //     setLoading(false);
+  //     setContent(x);
+  //   });
+  // }, [photo]);
+
   return (
     <>
-      {isLoading ? (
+      {!loading ? (
         <img
-          src={url}
-          alt={alt}
+          src={photo?.urls.full}
+          alt={photo?.alt_description}
           className={`${height} ${width} ${className}`}
         />
       ) : (

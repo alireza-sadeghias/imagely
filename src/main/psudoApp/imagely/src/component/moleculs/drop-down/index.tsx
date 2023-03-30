@@ -1,20 +1,21 @@
-import Icon from "../../atoms/icon";
-
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Icon from "../../atoms/icon";
 
 export interface IDropDownItem {
-  href?: string;
-  text?: string;
+  href: string;
+  text: string;
+  component: React.ReactNode;
 }
 
 interface IProps {
   items: IDropDownItem[];
-  className?:string
+  className?: string;
 }
 
 export default function DropDownMenu(props: IProps) {
-  const { items,className } = props;
+  const { items, className } = props;
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -33,23 +34,23 @@ export default function DropDownMenu(props: IProps) {
         className="relative inline-block text-indigo-50"
         icon={faUserCircle}
       />
-      <div
+      <ul
         className={
           show ? "block absolute bg-slate-100 w-32" : "hidden absolute"
         }
       >
         {items.map((x) => {
-          const { href, text } = x;
+          const { href, text, component } = x;
           return (
-            <a
+            <li
+              key={text}
               className="p-1 no-underline block border-b border-sky-500 hover:bg-slate-400"
-              href={href}
             >
-              {text}
-            </a>
+              <Link to={href}> {text}</Link>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   );
 }
