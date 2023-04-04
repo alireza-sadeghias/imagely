@@ -1,3 +1,4 @@
+// @ts-ignore
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../../atoms/icon";
 import Item from "../../atoms/menu-item";

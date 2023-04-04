@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLocalStorage } from "../localStorage/index";
+import { useLocalStorage } from "../localStorage";
 
 const AuthContext = createContext({} as IAuth);
 

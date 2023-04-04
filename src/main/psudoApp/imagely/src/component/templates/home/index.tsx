@@ -4,7 +4,7 @@ import Header from "../../organism/header";
 
 export default function ViewTemplate() {
   return (
-    <div className="font-face bg-neutral-50">
+    <div className="font-face bg-neutral-50 h-full">
       <Header />
       <Outlet />
       <Footer />

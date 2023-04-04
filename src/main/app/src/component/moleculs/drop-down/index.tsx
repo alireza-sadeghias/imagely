@@ -1,5 +1,6 @@
+// @ts-ignore
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "../../atoms/icon";
 

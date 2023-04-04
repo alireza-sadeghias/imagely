@@ -1,7 +1,7 @@
 import DropDownMenu, { IDropDownItem } from "../../moleculs/drop-down";
 import Menu, { IMenuItem } from "../../moleculs/menu";
 import SearchBox from "../../moleculs/seachbox";
-import Card from "../card";
+import Cart from "../cart";
 import History from "../content-info/history/index";
 import Repository from "../repository";
 
@@ -37,7 +37,7 @@ const Header = () => {
   const cart: IDropDownItem = {
     text: "سبد خرید",
     href: "/card",
-    component: <Card />,
+    component: <Cart />,
   };
   const exit: IDropDownItem = {
     text: "خروج",

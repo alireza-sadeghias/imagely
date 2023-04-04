@@ -2,7 +2,7 @@ import DropDownMenu, { IDropDownItem } from "../../moleculs/drop-down";
 import Menu, { IMenuItem } from "../../moleculs/menu";
 import SearchBox from "../../moleculs/seachbox";
 import Cart from "../cart";
-import History from "../content-info/history/index";
+import History from "../content-info/history";
 import Repository from "../repository";
 
 const Header = () => {

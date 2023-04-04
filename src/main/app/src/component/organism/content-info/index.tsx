@@ -19,6 +19,7 @@ export default function ContentInfo(props: IProps) {
       <WordCloud wordCloud={photo.alt_description.split(" ")} />
       <div className="mt-4 items-baseline px-2">
         <Button
+            type="button"
           value="افزودن به سبد خرید"
           className="py-3 px-3 rounded-lg shadow-lg bg-fuchsia-500 text-slate-100 font-semibold"
         ></Button>

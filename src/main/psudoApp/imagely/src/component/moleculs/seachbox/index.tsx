@@ -14,7 +14,6 @@ export default function SearchBox(props: IProps) {
       type={"text"}
       onKeyUp={(e) => {
         if (e.key === "Enter") {
-          // return <Navigate to={`/search/${e.currentTarget.value}`}></Navigate>; //TODO how to use this?
           navigate(`/search/${e.currentTarget.value}`);
         }
         // if(e.key.===13)

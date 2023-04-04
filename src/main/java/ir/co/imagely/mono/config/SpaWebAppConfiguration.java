@@ -42,9 +42,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {
-    "uk.co.caprica.spa.controller",
-    "uk.co.caprica.spa.service",
-    "uk.co.caprica.spa.repository"
+    "ir.co.imagely.mono.controller",
+    "ir.co.imagely.mono.service",
+    "ir.co.imagely.mono.repository"
 })
 public class SpaWebAppConfiguration implements WebMvcConfigurer {
 
