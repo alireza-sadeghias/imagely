@@ -1,11 +1,10 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../../atoms/button";
 import Card from "../../atoms/card";
 import Input from "../../atoms/input";
 import Label from "../../atoms/label";
 
-export default function LogIn() {
-
+export default function Register() {
   const navigate = useNavigate();
   return (
     <div className="grid h-screen place-items-center font-face">
@@ -78,12 +77,12 @@ export default function LogIn() {
           />
 
           <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-            ثبت نام نکرده اید؟
+            ثبت نام کرده اید؟
             <a
-              onClick={()=>navigate("/register")}
+            onClick={()=>navigate("/login")}
               className="text-red-700 hover:cursor-pointer hover:underline dark:text-cyan-50 mr-2 underline"
             >
-              ایجاد حساب کاربری
+              ورود به حساب کاربری
             </a>
           </div>
         </form>

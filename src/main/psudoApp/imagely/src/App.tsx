@@ -8,6 +8,7 @@ import ViewTemplate from "./component/templates/home";
 import AboutUs from "./component/organism/about-us";
 import LoginPage from "./component/pages/login";
 import { ProtectedRoute } from "./providers/protected-routes";
+import Register from "./component/pages/register";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Route>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<Register />} />
     </Routes>
   );
 }
