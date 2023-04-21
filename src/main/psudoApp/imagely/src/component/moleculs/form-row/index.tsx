@@ -11,10 +11,11 @@ interface IProps{
     inputClassName?:string,
     required?:boolean,
     htmlFor?: string,
+    onChange?: (text: string) => void;
 }
 
 export default function FormRow(props:IProps){
-    const {type,value,placeHolder,name,id,labelClassName,inputClassName,required =true,htmlFor} = props;
+    const {type,value,placeHolder,name,id,labelClassName,inputClassName,required,htmlFor, onChange=() => {}} = props;
     return (
         <div>
         <Label
@@ -30,7 +31,7 @@ export default function FormRow(props:IProps){
           className={inputClassName}
           placeholder={placeHolder}
           required={required}
-          
+          onChange={text => onChange(text)}
         />
       </div>
     );
