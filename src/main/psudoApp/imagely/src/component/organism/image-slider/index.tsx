@@ -2,7 +2,7 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import Icon from "../../atoms/icon";
 import Image from "../../atoms/image";
-import IPhoto from "../../../data-models/IPhoto";
+import IPhoto from "../../../data-models/photo/IPhoto";
 interface IProps {
   className?: string;
 }

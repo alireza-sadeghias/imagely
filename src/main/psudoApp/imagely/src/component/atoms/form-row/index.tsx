@@ -3,26 +3,34 @@ import Label from "../label";
 
 interface IProps{
     type?:string,
+    id?:string,
+    name?:string,
+    value?:string,
     placeHolder?:string,
+    labelClassName?:string,
+    inputClassName?:string,
+    required?:boolean,
+    htmlFor?: string,
 }
 
 export default function FormRow(props:IProps){
-    
+    const {type,value,placeHolder,name,id,labelClassName,inputClassName,required,htmlFor} = props;
     return (
         <div>
         <Label
-          htmlFor="email"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-right"
+          htmlFor={htmlFor}
+          className={labelClassName}
         >
-          ایمیل
+          {value}
         </Label>
         <Input
-          type="email"
-          name="email"
-          id="email"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-blue-100 dark:border-gray-400 dark:placeholder-gray-600 dark:text-gray-800"
-          placeholder="name@company.com"
-          required={true}
+          type={type}
+          name={name}
+          id={id}
+          className={inputClassName}
+          placeholder={placeHolder}
+          required={required}
+          
         />
       </div>
     );

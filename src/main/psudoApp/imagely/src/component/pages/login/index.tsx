@@ -1,8 +1,10 @@
 import { Navigate, useNavigate } from "react-router-dom";
 import Button from "../../atoms/button";
 import Card from "../../atoms/card";
+import FormRow from "../../atoms/form-row";
 import Input from "../../atoms/input";
 import Label from "../../atoms/label";
+import API from "../../../api/API";
 
 export default function LogIn() {
 
@@ -14,38 +16,31 @@ export default function LogIn() {
           <h5 className="text-xl font-medium text-blue-900 dark:text-white text-right">
             ورود به ایمیجلی
           </h5>
-          <div>
-            <Label
-              htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-right"
-            >
-              ایمیل
-            </Label>
-            <Input
-              type="email"
-              name="email"
-              id="email"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-blue-100 dark:border-gray-400 dark:placeholder-gray-600 dark:text-gray-800"
-              placeholder="name@company.com"
-              required={true}
+          
+          <FormRow 
+            htmlFor="email"
+            id="email" 
+            type="email"
+            name="email" 
+            labelClassName="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-right"
+            inputClassName="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-blue-100 dark:border-gray-400 dark:placeholder-gray-600 dark:text-gray-800"
+            required={true}
+            placeHolder="name@company.com"
+            value="ایمیل"
             />
-          </div>
-          <div>
-            <Label
-              htmlFor="password"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-right"
-            >
-              رمز عبور
-            </Label>
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="••••••••"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-blue-100 dark:border-gray-500 dark:placeholder-gray-400 dark:text-gray-800"
-              required={true}
+
+          <FormRow 
+            htmlFor="password"
+            id="password" 
+            type="password" 
+            name="password"
+            labelClassName="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-right"
+            inputClassName="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-blue-100 dark:border-gray-500 dark:placeholder-gray-400 dark:text-gray-800"
+            required={true}
+            placeHolder="••••••••"
+            value="رمز عبور"
             />
-          </div>
+
           <div className="flex flex-row-reverse">
             <div className="flex">
               <div className="h-5">
@@ -75,6 +70,16 @@ export default function LogIn() {
             type="submit"
             value="ورود"
             className="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+            onClick={()=>{
+              API.post('login',{
+                username:'alireza',
+                password:'alireza'
+              }).then(()=>{
+
+              }).catch(()=>{
+                
+              })
+            }}
           />
 
           <div className="text-sm font-medium text-gray-500 dark:text-gray-300">

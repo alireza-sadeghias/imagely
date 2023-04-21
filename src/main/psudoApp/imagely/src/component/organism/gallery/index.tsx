@@ -1,7 +1,7 @@
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import IPhoto from "../../../data-models/IPhoto";
+import IPhoto from "../../../data-models/photo/IPhoto";
 import Icon from "../../atoms/icon";
 import Image from "../../atoms/image";
 import DescriptionContent from "../../moleculs/description";

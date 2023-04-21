@@ -18,7 +18,7 @@ const AuthProvider = (props: IProps) => {
 
   const login = async (data: any) => {
     setUser(data);
-    navigate("/profile");
+    navigate("/gallery");
   };
 
   const logout = () => {

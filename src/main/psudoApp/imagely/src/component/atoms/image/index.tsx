@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import IPhoto from "../../../data-models/IPhoto";
+import IPhoto from "../../../data-models/photo/IPhoto";
 
 interface IProps {
   // image?: string;
