@@ -4,7 +4,7 @@ import Card from "../../atoms/card";
 import FormRow from "../../atoms/form-row";
 import Input from "../../atoms/input";
 import Label from "../../atoms/label";
-import API from "../../../api/API";
+import API from "../../../api/api";
 
 export default function LogIn() {
 

@@ -1,7 +1,7 @@
 import Button from "../../atoms/button";
 import Typography from "../../atoms/typography";
 import WordCloud from "../../moleculs/word-cloud";
-import IPhoto from "../../../data-models/photo/IPhoto";
+import IPhoto from "../../../models/photo/IPhoto";
 
 interface IProps {
   photo: IPhoto;
