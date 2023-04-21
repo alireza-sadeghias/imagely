@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../atoms/button";
 import Card from "../../atoms/card";
-import FormRow from "../../atoms/form-row";
+import FormRow from "../../moleculs/form-row";
 import API from "../../../api/API";
 import IUser from "../../../data-models/user/IUser";
 

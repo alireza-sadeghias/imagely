@@ -1,5 +1,5 @@
-import Input from "../input";
-import Label from "../label";
+import Input from "../../atoms/input";
+import Label from "../../atoms/label";
 
 interface IProps{
     type?:string,
@@ -14,7 +14,7 @@ interface IProps{
 }
 
 export default function FormRow(props:IProps){
-    const {type,value,placeHolder,name,id,labelClassName,inputClassName,required,htmlFor} = props;
+    const {type,value,placeHolder,name,id,labelClassName,inputClassName,required =true,htmlFor} = props;
     return (
         <div>
         <Label
